@@ -34,7 +34,6 @@ project(pwm_att C CXX ASM)
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
-
 add_executable(pwm_att pwm_att.c )
 
 pico_set_program_name(pwm_att "pwm_att")
@@ -48,18 +47,13 @@ pico_enable_stdio_usb(pwm_att 1)
 target_link_libraries(pwm_att
         pico_stdlib
         pico_time
-        hardware_irq
         hardware_pwm)
 
 # Add the standard include files to the build
 target_include_directories(pwm_att PRIVATE
-        ${CMAKE_CURRENT_LIST_DIR}
-)
+        ${CMAKE_CURRENT_LIST_DIR})
 
 # Add any user requested libraries
-target_link_libraries(pwm_att 
-        
-        )
+target_link_libraries(pwm_att)
 
 pico_add_extra_outputs(pwm_att)
-

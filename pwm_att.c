@@ -1,7 +1,6 @@
-#include <stdio.h>          //biblioteca padrãino da linguagem C
+#include <stdio.h>          //biblioteca padrão da linguagem C
 #include "pico/stdlib.h"    //subconjunto central de bibliotecas do SDK Pico
 #include "pico/time.h"      //biblioteca para gerenciamento de tempo
-#include "hardware/irq.h"   //biblioteca para gerenciamento de interrupções
 #include "hardware/pwm.h"   //biblioteca para controlar o hardware de PWM
 
 #define Robot_PIN 22        //pino do LED conectado a GPIO como PWM
@@ -26,19 +25,20 @@ int main()
     pwm_set_wrap(slice_num, 39062);   // Define o número de contagens necessárias para gerar um ciclo de 20ms.
     pwm_set_enabled(slice_num, true); // Habilita o PWM no pino
 
-    
+    //Movimentação do Robô
     printf("Posicionando o servo a 180 graus\n");
-    set_robot_move(Robot_PIN, 2400); // 180 graus
+    set_robot_move(Robot_PIN, 2400); // 180°
     sleep_ms(5000);
 
     printf("Posicionando o servo a 90 graus\n");
-    set_robot_move(Robot_PIN, 1500); // 90 graus
+    set_robot_move(Robot_PIN, 1500); // 90°
     sleep_ms(5000);
 
     printf("Posicionando o servo a 0 graus\n");
-    set_robot_move(Robot_PIN, 500); // 0 graus
+    set_robot_move(Robot_PIN, 500); // 0°
     sleep_ms(5000);
 
+    //Loop do movimento suave de 0° até 180°
     while (true) 
     {
         for(int soft = 500; soft <= 2400; soft += 5) //movimento suave de cima para baixo 
