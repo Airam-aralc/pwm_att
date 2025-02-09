@@ -8,7 +8,8 @@
 #define frequencia_PWM 50   //definição da frequência em 50Hz
 #define periodo_PWM 20000   //definição do período de 200ms
 
-void set_robot_move(uint gpio, uint16_t pulse_width_us) {
+void set_robot_move(uint gpio, uint16_t pulse_width_us) 
+{
     uint slice_num = pwm_gpio_to_slice_num(gpio);
     uint16_t level = (pulse_width_us * 39062) / periodo_PWM;
     pwm_set_gpio_level(gpio, level);
@@ -27,24 +28,24 @@ int main()
 
     while (true) 
     {
-        printf("Posicionando o servo a 0 graus\n");
-        set_robot_move(Robot_PIN, 500); // 0 graus
+        printf("Posicionando o servo a 180 graus\n");
+        set_robot_move(Robot_PIN, 2400); // 180 graus
         sleep_ms(5000);
 
         printf("Posicionando o servo a 90 graus\n");
         set_robot_move(Robot_PIN, 1500); // 90 graus
         sleep_ms(5000);
 
-        printf("Posicionando o servo a 180 graus\n");
-        set_robot_move(Robot_PIN, 2400); // 180 graus
+        printf("Posicionando o servo a 0 graus\n");
+        set_robot_move(Robot_PIN, 500); // 0 graus
         sleep_ms(5000);
 
-        for(uint16_t soft = 2400; soft >= 500; soft -= 5) //movimento suave de baixo para cima 
+        for(int soft = 500; soft <= 2400; soft += 5) //movimento suave de cima para baixo 
         {
             set_robot_move(Robot_PIN, soft);
             sleep_ms(10);
         }
-        for(uint16_t soft = 500; soft <= 2400; soft += 5) //movimento suave de cima para baixo
+        for(int soft = 2400; soft >= 500; soft -= 5) //movimento suave de baixo para cima
         {
             set_robot_move(Robot_PIN, soft);
             sleep_ms(10);
