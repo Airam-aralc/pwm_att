@@ -7,7 +7,7 @@
 #define frequencia_PWM 50   //definição da frequência em 50Hz
 #define periodo_PWM 20000   //definição do período de 200ms
 
-void set_robot_move(uint gpio, uint16_t pulse_width_us) 
+void set_robot_move(uint gpio, uint16_t pulse_width_us) //recebe um valor de pulso e ajusta o nível do PWM para mover o robô
 {
     uint slice_num = pwm_gpio_to_slice_num(gpio);
     uint16_t level = (pulse_width_us * 39062) / periodo_PWM;
