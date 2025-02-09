@@ -26,20 +26,21 @@ int main()
     pwm_set_wrap(slice_num, 39062);   // Define o número de contagens necessárias para gerar um ciclo de 20ms.
     pwm_set_enabled(slice_num, true); // Habilita o PWM no pino
 
+    
+    printf("Posicionando o servo a 180 graus\n");
+    set_robot_move(Robot_PIN, 2400); // 180 graus
+    sleep_ms(5000);
+
+    printf("Posicionando o servo a 90 graus\n");
+    set_robot_move(Robot_PIN, 1500); // 90 graus
+    sleep_ms(5000);
+
+    printf("Posicionando o servo a 0 graus\n");
+    set_robot_move(Robot_PIN, 500); // 0 graus
+    sleep_ms(5000);
+
     while (true) 
     {
-        printf("Posicionando o servo a 180 graus\n");
-        set_robot_move(Robot_PIN, 2400); // 180 graus
-        sleep_ms(5000);
-
-        printf("Posicionando o servo a 90 graus\n");
-        set_robot_move(Robot_PIN, 1500); // 90 graus
-        sleep_ms(5000);
-
-        printf("Posicionando o servo a 0 graus\n");
-        set_robot_move(Robot_PIN, 500); // 0 graus
-        sleep_ms(5000);
-
         for(int soft = 500; soft <= 2400; soft += 5) //movimento suave de cima para baixo 
         {
             set_robot_move(Robot_PIN, soft);
